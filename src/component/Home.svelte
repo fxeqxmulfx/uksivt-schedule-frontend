@@ -148,16 +148,50 @@
     } else if (params.teacher != null) {
         Cookies.set('teacher', params.teacher, {expires: 7})
     }
+
+    let theme
+
+    function setTheme() {
+        theme = Cookies.get("theme")
+        if (theme == null) {
+            Cookies.set("theme", "white", {expires: 7})
+        }
+        if (theme === "dark") {
+            document.body.classList.add("body-dark")
+        } else {
+            document.body.classList.remove("body-dark")
+        }
+    }
+
+    setTheme()
 </script>
 
 <main>
-    <button class="button" on:click={() => push("/teacher")}>Преподаватели</button>
-    <button class="button" on:click={() => push("/college_group")}>Группы</button>
-    <button class="button week" on:click={() => previewWeek()}>Предыдущая неделя</button>
-    <button class="button week" on:click={() => nextWeek()}>Следующая неделя</button>
-    <div class="info">{params.collegeGroup ?? params.teacher}</div>
+    <button class="{theme!=='dark' ? 'button' : 'button button-dark'}" on:click={() => push("/teacher")}>
+        Преподаватели
+    </button>
+    <button class="{theme!=='dark' ? 'button' : 'button button-dark'}" on:click={() => push("/college_group")}>
+        Группы
+    </button>
+    <button class="{theme!=='dark' ? 'button week' : 'button week button-dark'}" on:click={() => previewWeek()}>
+        Предыдущая неделя
+    </button>
+    <button class="{theme!=='dark' ? 'button week' : 'button week button-dark'}" on:click={() => nextWeek()}>
+        Следующая неделя
+    </button>
+    <button class="{theme !== 'dark' ? 'info': 'info info-dark'}" on:click={()=>{
+        const localTheme = Cookies.get("theme")
+        if (localTheme === "white") {
+            Cookies.set("theme", "dark",{expires: 7})
+        } else {
+            Cookies.set("theme", "white",{expires: 7})
+        }
+        setTheme()
+    }}>
+        {params.collegeGroup ?? params.teacher} || {theme !== 'dark' ? 'white' : 'dark'}
+    </button>
     {#each [1, 2, 3, 4, 5, 6] as dayNumber}
-        <div id={dayNumber} class="day">
+        <div id={dayNumber} class="{theme !== 'dark' ? 'day' : 'day day day-dark'}">
             <div class="header">
                 <div>{getDay(dayNumber)}</div>
                 <div class="date-header">
@@ -170,7 +204,7 @@
                 <div class="padding">
                     <hr>
                 </div>
-                <div class={day["replacement"] ? "day-row day-row-replace" : "day-row"}>
+                <div class={day["replacement"] ? theme !== "dark" ? "day-row day-row-replace" : "day-row day-row-replace-dark" : "day-row"}>
                     <div>{day["time"]}</div>
                     <div>{day["lesson_number"]}</div>
                     <div>{day["lesson"]}</div>
@@ -180,9 +214,11 @@
             {/each}
         </div>
     {/each}
-    <div class="info-footer">v0.3.1 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
-    <div class="info-footer">
-        Во вторник и пятницу театральный коллектив «Октава» приглашает всех желающих в актовый зал с 13.00 до 17.00 для участия в будущих спектаклях
+    <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
+        v0.4.0 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
+    <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
+        Во вторник и пятницу театральный коллектив «Октава» приглашает всех желающих в актовый зал с 13.00 до 17.00 для
+        участия в будущих спектаклях
     </div>
 </main>
 
@@ -200,21 +236,6 @@
         display: none;
     }
 
-    .button {
-        border: none;
-        border-radius: 0.3rem;
-        padding: 0.3rem;
-        font-size: 1rem;
-
-        background-color: rgb(244, 244, 244);
-        color: rgb(37, 36, 39);
-    }
-
-    .button:hover {
-        background-color: rgb(244, 244, 244);
-        color: rgb(37, 36, 39);
-    }
-
     .info, .info-footer {
         border: none;
         border-radius: 0.3rem;
@@ -225,6 +246,11 @@
 
         grid-column: 2 span;
 
+        background-color: #7cc2ff;
+        color: rgb(37, 36, 39);
+    }
+
+    .info-dark {
         background-color: rgb(37, 36, 39);
         color: rgb(244, 244, 244);
     }
@@ -291,6 +317,11 @@
         border-radius: 0.4rem;
         padding: 0.3rem;
 
+        background-color: #F7F8FB;
+        color: rgb(37, 36, 39);
+    }
+
+    .day-dark {
         background-color: rgb(37, 36, 39);
         color: rgb(244, 244, 244);
     }
@@ -316,7 +347,12 @@
     }
 
     .day-row-replace {
-        background-color: rgb(245, 124, 0);
+        background-color: #C8E5FC;
+        color: rgb(37, 36, 39);
+    }
+
+    .day-row-replace-dark {
+        background-color: #7cc2ff;
         color: rgb(37, 36, 39);
     }
 

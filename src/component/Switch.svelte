@@ -1,6 +1,7 @@
 <script lang="ts">
     import {location, push} from 'svelte-spa-router'
     import {backend} from "../store";
+    import Cookies from "js-cookie";
 
     let buttons = []
 
@@ -17,11 +18,14 @@
             push(`/teacher/${path}`)
         }
     }
+
+    const theme = Cookies.get("theme")
 </script>
 
 <main>
     {#each buttons as button}
-        <button class="button" on:click={() => navigate(button)}>{button}</button>
+        <button class="{theme !== 'dark' ? 'button' : 'button button-dark'}"
+                on:click={() => navigate(button)}>{button}</button>
     {/each}
 </main>
 
@@ -61,20 +65,5 @@
         main {
             grid-template-columns: repeat(6, 1fr);
         }
-    }
-
-    .button {
-        border: none;
-        border-radius: 0.3rem;
-        padding: 0.3rem;
-        font-size: 1rem;
-
-        background-color: rgb(244, 244, 244);
-        color: rgb(37, 36, 39);
-    }
-
-    .button:hover {
-        background-color: rgb(244, 244, 244);
-        color: rgb(37, 36, 39);
     }
 </style>
