@@ -191,7 +191,7 @@
         {params.collegeGroup ?? params.teacher} || {theme !== 'dark' ? 'white' : 'dark'}
     </button>
     {#each [1, 2, 3, 4, 5, 6] as dayNumber}
-        <div id={dayNumber} class="{theme !== 'dark' ? 'day' : 'day day day-dark'}">
+        <div id={dayNumber} class="{theme !== 'dark' ? 'day' : 'day day-dark'}">
             <div class="header">
                 <div>{getDay(dayNumber)}</div>
                 <div class="date-header">
@@ -215,7 +215,7 @@
         </div>
     {/each}
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
-        v0.4.0 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
+        v0.4.3 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
         Во вторник и пятницу театральный коллектив «Октава» приглашает всех желающих в актовый зал с 13.00 до 17.00 для
         участия в будущих спектаклях
@@ -246,13 +246,23 @@
 
         grid-column: 2 span;
 
-        background-color: #7cc2ff;
+        background-color: #7CC2FF;
+        color: rgb(37, 36, 39);
+    }
+
+    .info:hover, .info-footer:hover {
+        background-color: #7CC2FF;
         color: rgb(37, 36, 39);
     }
 
     .info-dark {
-        background-color: rgb(37, 36, 39);
-        color: rgb(244, 244, 244);
+        background-color: #E2E2E2;
+        color: rgb(37, 36, 39);
+    }
+
+    .info-dark:hover {
+        background-color: #E2E2E2;
+        color: rgb(37, 36, 39);
     }
 
     @media screen and (min-width: 800px) {
@@ -352,7 +362,7 @@
     }
 
     .day-row-replace-dark {
-        background-color: #7cc2ff;
+        background-color: #7CC2FF;
         color: rgb(37, 36, 39);
     }
 

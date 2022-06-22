@@ -22,21 +22,21 @@ body {
     padding: 0.3rem;
     font-size: 1rem;
 
-    background-color: #7cc2ff;
+    background-color: #7CC2FF;
     color: rgb(37, 36, 39);
 }
 
 .button:hover {
-    background-color: #7cc2ff;
+    background-color: #7CC2FF;
     color: rgb(37, 36, 39);
 }
 
 .button-dark {
-    background-color: rgb(244, 244, 244);
+    background-color: #E2E2E2;
     color: rgb(37, 36, 39);
 }
 
 .button-dark:hover {
-    background-color: rgb(244, 244, 244);
+    background-color: #E2E2E2;
     color: rgb(37, 36, 39);
 }
