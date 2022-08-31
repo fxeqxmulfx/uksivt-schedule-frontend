@@ -215,7 +215,7 @@
         </div>
     {/each}
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
-        v0.4.3 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
+        v0.5.0 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
         Во вторник и пятницу театральный коллектив «Октава» приглашает всех желающих в актовый зал с 13.00 до 17.00 для
         участия в будущих спектаклях
