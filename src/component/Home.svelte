@@ -3,6 +3,7 @@
     import {push} from "svelte-spa-router";
     import Cookies from 'js-cookie'
     import {afterUpdate} from "svelte";
+    import {pullTheme} from "./Utils";
 
     export let params: { collegeGroup: string | null, teacher: string | null } = {}
 
@@ -130,7 +131,7 @@
 
     function moveToDay() {
         ++countCall
-        if (countCall === 2) {
+        if (countCall === 3) {
             const day = new Date().getDay()
             const elementId = document.getElementById(day.toString())
             if (elementId != null) {
@@ -149,21 +150,7 @@
         Cookies.set('teacher', params.teacher, {expires: 7})
     }
 
-    let theme
-
-    function setTheme() {
-        theme = Cookies.get("theme")
-        if (theme == null) {
-            Cookies.set("theme", "white", {expires: 7})
-        }
-        if (theme === "dark") {
-            document.body.classList.add("body-dark")
-        } else {
-            document.body.classList.remove("body-dark")
-        }
-    }
-
-    setTheme()
+    let theme = pullTheme()
 </script>
 
 <main>
@@ -180,13 +167,13 @@
         Следующая неделя
     </button>
     <button class="{theme !== 'dark' ? 'info': 'info info-dark'}" on:click={()=>{
-        const localTheme = Cookies.get("theme")
+        const localTheme = Cookies.get("theme") ?? "white"
         if (localTheme === "white") {
-            Cookies.set("theme", "dark",{expires: 7})
+            Cookies.set("theme", "dark", {expires: 7})
         } else {
-            Cookies.set("theme", "white",{expires: 7})
+            Cookies.set("theme", "white", {expires: 7})
         }
-        setTheme()
+        theme = pullTheme()
     }}>
         {params.collegeGroup ?? params.teacher} || {theme !== 'dark' ? 'white' : 'dark'}
     </button>
@@ -215,7 +202,7 @@
         </div>
     {/each}
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
-        v0.5.0 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
+        v0.6.0 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
         Во вторник и пятницу театральный коллектив «Октава» приглашает всех желающих в актовый зал с 13.00 до 17.00 для
         участия в будущих спектаклях

@@ -1,7 +1,7 @@
 <script lang="ts">
     import {location, push} from 'svelte-spa-router'
     import {backend} from "../store";
-    import Cookies from "js-cookie";
+    import {pullTheme} from "./Utils";
 
     let buttons = []
 
@@ -19,7 +19,7 @@
         }
     }
 
-    const theme = Cookies.get("theme")
+    const theme = pullTheme()
 </script>
 
 <main>

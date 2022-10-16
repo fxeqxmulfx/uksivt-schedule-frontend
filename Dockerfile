@@ -1,4 +1,4 @@
-FROM node:16.17.0 as builder
+FROM node:16.18.0-slim as builder
 
 WORKDIR temp
 COPY public public
@@ -12,7 +12,7 @@ RUN npm update -g npm
 RUN npm install
 RUN npm run build
 
-FROM node:16.17.0-slim
+FROM node:16.18.0-slim
 
 WORKDIR app
 COPY --from=builder temp/public public
