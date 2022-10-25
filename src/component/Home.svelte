@@ -131,7 +131,7 @@
 
     function moveToDay() {
         ++countCall
-        if (countCall === 3) {
+        if (countCall === 2) {
             const day = new Date().getDay()
             const elementId = document.getElementById(day.toString())
             if (elementId != null) {
@@ -202,7 +202,7 @@
         </div>
     {/each}
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
-        v0.6.0 Автор: <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
+        v0.6.1 Если найдете глюки, пишите :) <a href="https://vk.com/f_x_eq_x_mul_f_x">vk</a></div>
     <div class="{theme !== 'dark' ? 'info-footer': 'info-footer info-dark'}">
         Во вторник и пятницу театральный коллектив «Октава» приглашает всех желающих в актовый зал с 13.00 до 17.00 для
         участия в будущих спектаклях
